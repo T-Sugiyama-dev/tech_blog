@@ -1,0 +1,23 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.wrapper h1 {
+  color: #ffffff;
+  font-size: 5rem;
+  margin: 3px 0px;
+}
+
+.wrapper h2 {
+  color: #ffffff;
+  font-size: 2rem;
+  margin: 3px 0px;
+}

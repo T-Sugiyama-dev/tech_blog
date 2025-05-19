@@ -1,0 +1,42 @@
+/* tocbotのスタイルをカスタマイズ */
+.toc {
+  font-size: 14px;
+}
+
+.toc :global(.toc-list-item) {
+  position: relative;
+  padding-left: 15px;
+  margin: 8px 0;
+}
+
+.toc :global(.toc-list-item::before) {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.toc :global(.toc-list-item.is-active-li::before) {
+  background: #8d87ff;
+}
+
+.toc :global(.toc-link) {
+  color: #e9e9e9;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.toc :global(.toc-link.is-active-link) {
+  color: #8d87ff;
+  font-weight: 600;
+}
+
+.toc :global(.toc-list) {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

@@ -4,7 +4,7 @@ import blogTechBanner from "@/assets/logo/blog_tech_banner.png";
 import car_body from "@/assets/car/car_body.png";
 import tire from "@/assets/car/tire.png";
 import { getAllPosts } from '@/lib/blog';
-import PostSlider from "@/components/feature/post-slider/post-slider";
+import PostSlider from "@/components/feature/post/slider/post-slider";
 import SearchForm from "@/components/feature/search/form/search-form";
 
 export default async function Home() {

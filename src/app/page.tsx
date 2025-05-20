@@ -1,95 +1,84 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+import Image from "next/image";
+import blogTechBanner from "@/assets/logo/blog_tech_banner.png";
+import car_body from "@/assets/car/car_body.png";
+import tire from "@/assets/car/tire.png";
+import { getAllPosts } from '@/lib/blog';
+import PostSlider from "@/components/feature/post-slider/post-slider";
+import SearchForm from "@/components/feature/search-form/search-form";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getAllPosts();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className={styles.container}>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <div className={styles.title_container}>
+        <div className={styles.title_wrapper}>
+          <div className={styles.title_image_container}>
+            <Image src={blogTechBanner} alt="logo" className={styles.title_image} />
+          </div>
+
+          <div className={styles.title_text_container}>
+            <h1 className={styles.title}>Dev Log</h1>
+            <p className={styles.description}>
+              Sharing the latest technology and programming knowledge.
+              I dive deep into cutting-edge technology trends including AI, Python, TypeScript, React, and Next.js,
+              delivering practical tutorials and best practices.
+              From experienced engineers to those just starting their programming journey,
+              I share the knowledge I&apos;ve acquired as technology evolves.
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className={styles.car_container}>
+          <div className={styles.car_body}>
+            <Image
+              src={car_body}
+              alt="car body"
+              className={styles.car_body_image}
+            />
+          </div>
+
+          <div className={styles.tire_front}>
+            <Image
+              src={tire}
+              alt="car tire"
+              className={styles.tire_front_image}
+            />
+          </div>
+
+          <div className={styles.tire_rear}>
+            <Image
+              src={tire}
+              alt="car tire"
+              className={styles.tire_rear_image}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.search_container}>
+        <div className={styles.search_wrapper}>
+          <div>
+            <h2 className={styles.search_title}>Search</h2>
+          </div>
+
+          <SearchForm />
+        </div>
+      </div>
+
+      <div className={styles.content_container}>
+        <div className={styles.content_wrapper}>
+          <div>
+            <h2 className={styles.content_title}>Posts</h2>
+          </div>
+
+          <div>
+            <PostSlider posts={posts} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

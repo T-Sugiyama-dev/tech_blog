@@ -1,0 +1,52 @@
+# How to Get Token Count with LangChain
+
+This article explains how to retrieve token counts and manage costs when interacting with LLMs using LangChain.
+
+## Basic Implementation
+
+You can get token counts from the metadata after executing a LangChain chain as follows:
+
+```python
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+
+# Set up prompt template
+prompt = PromptTemplate(
+    input_variables=["text"],
+    template="Analyze the following text: {text}"
+)
+
+# Configure LLM
+llm = ChatOpenAI(
+  model="gpt-4o",
+  temperature=0,
+)
+
+# Create chain
+chain = prompt | llm
+
+# Execute chain and get token counts
+results = chain.invoke({"text": "Text to analyze"})
+
+# Get token counts
+input_tokens = results.usage_metadata['input_tokens']
+output_tokens = results.usage_metadata['output_tokens']
+
+print(f"Input tokens: {input_tokens}")
+print(f"Output tokens: {output_tokens}")
+```
+
+## Important Considerations
+
+1. Token counting methods may vary depending on the model
+2. Cost calculations need to be adjusted according to the pricing structure of the model being used
+3. Proper error handling is crucial when implementing batch processing
+
+## Summary
+
+LangChain makes it easy to retrieve token counts and manage costs.
+
+## Reference Links
+
+- [LangChain Official Documentation](https://python.langchain.com/docs/introduction)
+- [LangChain GitHub](https://github.com/langchain-ai/langchain)

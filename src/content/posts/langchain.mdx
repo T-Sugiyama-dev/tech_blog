@@ -1,0 +1,115 @@
+# How to Create Custom Agents with LangChain
+
+LangChain is a framework that streamlines the development of applications using Large Language Models (LLMs). In this article, we'll explore how to create custom agents using LangChain.
+
+## Basic Structure of an Agent
+
+A LangChain agent consists of the following main components:
+
+1. LLM (Language Model)
+2. Tools (functions that the agent can use)
+3. Prompt Template
+4. Agent Executor
+
+## Implementation Example
+
+Here's an example of a custom agent implementation for data analysis and visualization:
+
+```python
+import logging
+
+from langchain_core.tools import tool
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.agents import AgentExecutor, create_tool_calling_agent, Tool
+from langchain_openai import ChatOpenAI
+
+@tool
+def display_data(data: str) -> str:
+    """Displays data in a table"""
+    return "Data displayed"
+
+@tool
+def analyze_data(data: str) -> str:
+    """Analyzes data and outputs trends and analysis comments"""
+    return "Analysis complete"
+
+
+class CustomAgent:
+    def __init__(self):
+        # LLM configuration
+        llm = ChatOpenAI(
+          model="gpt-4o",
+          temperature=0,
+        )
+
+        # Tool definitions
+        tools = [
+            Tool(
+                name="display_data",
+                func=display_data,
+                description="Displays data in a table",
+                return_direct=True,
+            ),
+            Tool(
+                name="analyze_data",
+                func=analyze_data,
+                description="Analyzes data and outputs trends and analysis comments",
+                return_direct=True,
+            ),
+        ]
+        
+        # Prompt template configuration
+        template = ChatPromptTemplate.from_messages([
+            ("system", PROMPT_TEMPLATE),
+            ("user", "{user_input}"),
+            MessagesPlaceholder(variable_name="agent_scratchpad")
+        ])
+
+        # Agent creation
+        tool_calling_agent = create_tool_calling_agent(llm, tools, template)
+        self.agent = AgentExecutor(agent=tool_calling_agent, tools=tools, verbose=True)
+    
+    def invoke(self, user_input: str):
+        try:
+            response = self.agent.invoke(
+                { 'user_input': user_input },
+            )
+    
+            return response.get('output', None)
+        except Exception as e:
+            logging.error(f"Error: {e}")
+```
+
+## Explanation of Key Features
+
+### 1. Tool Definition
+Define the functions that the agent can use using the `Tool` class. Each tool requires the following information:
+- name: Tool name
+- func: Function to execute
+- description: Tool description
+- return_direct: Whether to return results directly
+
+### 2. Prompt Template
+Use `ChatPromptTemplate` to define the conversation flow of the agent. It can include system prompts, user input, and the agent's thought process.
+
+### 3. Agent Execution
+Use `AgentExecutor` to run the agent. The `invoke` method processes user input and selects and executes appropriate tools.
+
+## Usage Example
+
+```python
+# Instantiate the agent
+agent = CustomAgent()
+
+# Execute the agent
+response = agent.invoke("Analyze the sales data for the past month")
+```
+
+## Summary
+
+Using LangChain, you can easily create custom agents that leverage LLMs. By adding tools and adjusting prompts, you can build agents for various use cases.
+
+## Reference Links
+
+- [LangChain Official Documentation](https://python.langchain.com/docs/introduction)
+- [LangChain GitHub](https://github.com/langchain-ai/langchain)

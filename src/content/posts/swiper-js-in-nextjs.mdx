@@ -1,0 +1,142 @@
+# Complete Guide to Implementing Swiper.js in Next.js 15 App Router
+
+## What is Swiper.js?
+
+Swiper.js is a powerful JavaScript library for implementing modern touch sliders. It enables easy creation of mobile-friendly, responsive sliders, carousels, tabs, and galleries.
+
+## Key Features
+
+- 🎯 Touch swipe support
+- 📱 Mobile-friendly
+- 🎨 Customizable design
+- ⚡ Performance optimized
+
+## Installation and Initial Setup
+
+### 1. Package Installation
+
+```bash
+npm install swiper
+# or
+yarn add swiper
+```
+
+### 2. CSS Import
+
+```typescript
+// app/layout.tsx
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+```
+
+## Basic Implementation
+
+### 1. Sample Slider
+
+```typescript
+'use client';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import styles from "./post-slider.module.css";
+
+export default function BlogPostSlider() {
+
+  const slideSettings = {
+    0: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    1980: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+  };
+
+  return (
+    <Swiper
+      modules={[Navigation, Pagination]}
+      spaceBetween={30}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      breakpoints={slideSettings}
+    >
+      {posts.map((post, index) => (
+        <SwiperSlide key={index} style={{ width: '300px', display: 'flex', justifyContent: 'center' }}>
+          <div className={styles.blog_card}>
+
+            <div className={styles.thumbnail_container}>
+              <div className={styles.thumbnail_wrapper}>
+                <h3>{post.title}</h3>
+              </div>
+            </div>
+
+            <div className={styles.description_container}>
+              <div className={styles.description_container_inner}>
+                <p>{post.description}</p>
+              </div>
+
+              <div className={styles.tag_container}>
+                {post.tags.map((tag, index) => (
+                  <span key={index} className={styles.tag}>#{tag}</span>
+                ))}
+              </div>
+              <Link href={`/posts/${post.slug}`}>
+                <button className={styles.blog_card_button}>
+                  Read
+                </button>
+              </Link>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+}
+```
+
+## Common Issues and Solutions
+
+### 1. Slider Not Displaying
+
+- Ensure CSS is properly imported
+- Verify component is declared with 'use client'
+- Check module imports
+
+### 2. Navigation Not Working
+
+- Verify navigation configuration
+- Check CSS z-index values
+
+### 3. Performance Issues
+
+- Consider using virtual slides for large datasets
+- Optimize images
+- Implement lazy loading
+
+## Best Practices
+
+1. Always use 'use client' directive for Swiper components
+2. Import required CSS files in layout.tsx
+3. Use TypeScript for better type safety
+4. Implement proper error boundaries
+5. Consider mobile-first design
+
+## Summary
+
+When implementing Swiper.js in Next.js 15 App Router, remember to:
+1. Declare components as client components
+2. Import necessary CSS files
+3. Consider performance optimization
+4. Implement responsive design
+
+Swiper.js is a powerful tool for creating modern slider components in your Next.js applications.
+
+## References
+- [Swiper.js official documentation](https://swiperjs.com/)

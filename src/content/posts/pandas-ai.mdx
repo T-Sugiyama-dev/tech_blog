@@ -1,0 +1,54 @@
+# Data Analysis with Natural Language using PandasAI
+
+PandasAI is a Python library that allows you to execute queries on Pandas DataFrames using natural language. It leverages Large Language Models (LLMs) like GPT-4 to perform complex data analysis tasks through simple natural language commands.
+
+## Features of PandasAI
+
+- Natural language data analysis queries
+- Data visualization capabilities
+- Automation of complex data operations
+
+## Basic Usage
+
+Here's a basic example of how to use PandasAI:
+
+```python
+import pandas as pd
+from pandasai import Agent
+from pandasai.llm import OpenAI
+
+# Create sample data
+df = pd.DataFrame({
+    'Product': ['A', 'B', 'C', 'D', 'E'],
+    'Sales': [100, 200, 150, 300, 250],
+    'Cost': [50, 100, 75, 150, 125]
+})
+
+# Initialize PandasAI agent
+agent = Agent(
+    df,
+    config={
+        "llm": OpenAI(model_name="gpt-4o"),
+        "custom_whitelisted_dependencies": ["plotly"],
+    }
+)
+
+# Execute natural language query
+result = agent.chat("Show me a graph of the relationship between sales and cost")
+```
+
+## Summary
+
+Using PandasAI offers several benefits:
+
+1. Lower barrier to entry for data analysis
+2. Intuitive natural language operations
+3. Automation of complex analysis tasks
+4. Automatic visualization generation
+
+However, it's important to consider security aspects and implement proper error handling.
+
+## References
+
+- [PandasAI Official Documentation](https://docs.getpanda.ai/v3/introduction)
+- [PandasAI GitHub](https://github.com/sinaptik-ai/pandas-ai)

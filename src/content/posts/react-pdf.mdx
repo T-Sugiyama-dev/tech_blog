@@ -1,0 +1,137 @@
+# Generating Invoice PDFs with React-PDF
+
+React-PDF is a powerful library for generating and displaying PDF documents within React applications. This article demonstrates how to implement an invoice PDF generator using React-PDF.
+
+## Features of React-PDF
+
+- Define PDFs as React components
+- Customizable styling
+- Responsive layouts
+
+## Implementation Example
+
+Here's an example of a component that generates an invoice PDF:
+
+```tsx
+import { PDFViewer, Document, Page, StyleSheet, Text, View, Font } from "@react-pdf/renderer";
+
+// Register Japanese fonts
+Font.register({
+  family: "NotoSansJP",
+  fonts: [
+    {
+      src: "../fonts/NotoSansJP-Regular.ttf",
+    },
+    {
+      src: "../fonts/NotoSansJP-Bold.ttf",
+      fontWeight: "bold",
+    },
+  ],
+});
+
+// Define styles
+const styles = StyleSheet.create({
+  page: {
+    padding: 30,
+    fontSize: 11,
+    fontFamily: "NotoSansJP",
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  // ... other styles
+});
+
+// PDF Component
+const InvoicePDF = ({ invoiceData }) => {
+  return (
+    <PDFViewer width="100%" height="100%">
+      <Document>
+        <Page style={styles.page} size="A4">
+          <View>
+            <Text style={styles.header}>Invoice</Text>
+            {/* Invoice content */}
+          </View>
+        </Page>
+      </Document>
+    </PDFViewer>
+  );
+};
+```
+
+## Key Components
+
+1. **PDFViewer**: Component for displaying PDFs
+2. **Document**: Root component for PDF documents
+3. **Page**: Defines individual pages
+4. **View**: Container for layout
+5. **Text**: Displays text content
+
+## Styling
+
+React-PDF uses StyleSheet for defining styles. It supports a subset of CSS and includes Flexbox layout capabilities.
+
+```tsx
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  text: {
+    fontSize: 12,
+    color: '#000',
+  },
+});
+```
+
+## Complete Implementation Example
+
+Here's a more detailed example of an invoice PDF generator:
+
+```tsx
+const InvoicePDF = ({ invoiceData }) => {
+  return (
+    <PDFViewer width="100%" height="100%">
+      <Document>
+        <Page style={styles.page} size="A4">
+          <View style={styles.headerContainer}>
+            <Text style={styles.header}>Invoice</Text>
+          </View>
+          <View style={styles.details}>
+            <View style={styles.detailItem}>
+              <Text>{invoiceData.clientInfo.name}</Text>
+              <Text>Invoice Date: {formatDate(invoiceData.billingDate)}</Text>
+            </View>
+          </View>
+          {/* Invoice items table */}
+          <View style={styles.itemsTable}>
+            {/* Table implementation */}
+          </View>
+          {/* Tax calculations */}
+          <View style={styles.totalContainer}>
+            {/* Total amount calculations */}
+          </View>
+        </Page>
+      </Document>
+    </PDFViewer>
+  );
+};
+```
+
+## Best Practices
+
+1. **Font Management**: Register fonts at the application level
+2. **Performance**: Optimize PDF generation for large documents
+3. **Error Handling**: Implement proper error boundaries
+4. **Testing**: Test PDF generation with various data sets
+
+## Conclusion
+
+React-PDF provides a flexible solution for generating and displaying PDFs within React applications. It's particularly well-suited for business documents like invoices and reports.
+
+## References
+
+- [React-PDF Official Documentation](https://react-pdf.org/)
+- [GitHub Repository](https://github.com/diegomura/react-pdf)

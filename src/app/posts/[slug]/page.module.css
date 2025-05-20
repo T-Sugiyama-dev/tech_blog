@@ -1,0 +1,256 @@
+.container {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.top_container {
+  width: 100vw;
+  min-height: 450px;
+  padding: 100px 0px 50px 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(180deg,
+      rgb(10, 2, 49),
+      rgba(78, 51, 234, 0.4));
+
+  backdrop-filter: brightness(0.2);
+
+  box-shadow:
+    0 0 20px rgba(78, 51, 234, 0.4),
+    0 0 40px rgba(82, 51, 234, 0.3),
+    0 0 60px rgba(85, 51, 234, 0.2),
+    inset 0 0 30px rgba(100, 51, 234, 0.2);
+}
+
+.top_wrapper {
+  width: 70%;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 1100px) {
+    width: 90%;
+  }
+}
+
+.title_wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.tag_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tag {
+  background-color: #fff;
+  color: #563edd;
+  padding: 7px 12px;
+  border-radius: 20px;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.3)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+}
+
+.date_container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.date {
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.content_container {
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0px;
+  color: #ffffff;
+  position: relative;
+
+  @media (max-width: 1100px) {
+    width: 90%;
+  }
+}
+
+.content_wrapper {
+  width: calc(100% - 300px);
+  margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
+}
+
+.toc_container {
+  position: fixed;
+  max-width: 300px;
+  height: 100vh;
+  top: 50%;
+  right: 3%;
+
+  @media (max-width: 1100px) {
+    display: none;
+  }
+}
+
+/* コードブロック全体のスタイル */
+.content_wrapper :global(pre) {
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  overflow-x: auto;
+}
+
+/* コードブロック内のコード要素のスタイル */
+.content_wrapper :global(pre code) {
+  padding: 0;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  @media (max-width: 500px) {
+    font-size: 0.8rem;
+  }
+}
+
+/* 行番号のスタイル */
+.content_wrapper :global(.line) {
+  padding: 0 0.5rem;
+  min-width: 2.5rem;
+  display: inline-block;
+  text-align: right;
+  color: #6b7280;
+  user-select: none;
+}
+
+/* コードの行のスタイル */
+.content_wrapper :global(.line-content) {
+  padding: 0 1rem;
+  display: inline-block;
+  width: 100%;
+}
+
+/* ハイライトされた行のスタイル */
+.content_wrapper :global(.highlighted) {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 2px solid #60a5fa;
+}
+
+/* ハイライトされた単語のスタイル */
+.content_wrapper :global(.word) {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* 見出しのスタイリング */
+.content_wrapper h1 {
+  font-size: 2.5rem;
+  margin: 2rem 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #eaeaea;
+
+  @media (max-width: 500px) {
+    font-size: 2.2rem;
+  }
+}
+
+.content_wrapper h2 {
+  font-size: 2rem;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #eaeaea;
+
+  @media (max-width: 500px) {
+    font-size: 1.9rem;
+  }
+}
+
+.content_wrapper h3 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+
+  @media (max-width: 500px) {
+    font-size: 1.5rem;
+  }
+}
+
+/* 段落のスタイリング */
+.content_wrapper p {
+  line-height: 1.8;
+  margin: 1.2rem 0;
+}
+
+/* リストのスタイリング */
+.content_wrapper ul,
+.content_wrapper ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.content_wrapper li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+/* コードブロックのスタイリング */
+.content_wrapper pre {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+}
+
+/* インラインコードのスタイリング */
+.content_wrapper code {
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+
+  @media (max-width: 500px) {
+    font-size: 0.8em;
+  }
+}
+
+/* 引用のスタイリング */
+.content_wrapper blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #eaeaea;
+  background-color: #f9f9f9;
+  font-style: italic;
+}
+
+/* リンクのスタイリング */
+.content_wrapper a {
+  color: #0070f3;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.content_wrapper a:hover {
+  color: #0051a2;
+  text-decoration: underline;
+}
